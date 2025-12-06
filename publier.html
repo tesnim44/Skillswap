@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publier une annonce - SkillSwap</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>SkillSwap</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="annonce.html">Annonces</a></li>
+                    <li><a href="publier.html" class="active">Publier</a></li>
+                    <li><a href="dashbord.html">Tableau de bord</a></li>
+                   
+                </ul>
+                <button class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Publier une annonce</h1>
+        <p>Partagez vos compétences ou ce que vous souhaitez apprendre</p>
+    </section>
+
+    <!-- Formulaire -->
+    <section class="form-section">
+        <div class="container">
+            <form id="annonce-form">
+                <div class="form-group">
+                    <label for="annonce-type">Type d'annonce *</label>
+                    <select id="annonce-type" required>
+                        <option value="">Sélectionnez un type</option>
+                        <option value="propose">Je propose d'enseigner une compétence</option>
+                        <option value="cherche">Je cherche à apprendre une compétence</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="titre">Titre de l'annonce *</label>
+                    <input type="text" id="titre" placeholder="Ex: Cours de guitare pour débutants" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="domaine">Domaine de compétence *</label>
+                    <select id="domaine" required>
+                        <option value="">Sélectionnez un domaine</option>
+                        <option value="informatique">Informatique</option>
+                        <option value="musique">Musique</option>
+                        <option value="langues">Langues</option>
+                        <option value="art">Art & Design</option>
+                        <option value="sport">Sport</option>
+                        <option value="cuisine">Cuisine</option>
+                        <option value="sciences">Sciences</option>
+                        <option value="autres">Autres</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="competence">Compétence spécifique *</label>
+                    <input type="text" id="competence" placeholder="Ex: Python, Guitare acoustique, Espagnol" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description détaillée *</label>
+                    <textarea id="description" rows="6" placeholder="Décrivez votre proposition ou votre demande en détails..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Niveau *</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="niveau" value="debutant" required>
+                            <span>Débutant</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="niveau" value="intermediaire">
+                            <span>Intermédiaire</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="niveau" value="avance">
+                            <span>Avancé</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Disponibilités *</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="dispo" value="weekend">
+                            <span>Week-end</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="dispo" value="soir">
+                            <span>Soirées</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="dispo" value="matin">
+                            <span>Matin</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="dispo" value="aprem">
+                            <span>Après-midi</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="dispo" value="flexible">
+                            <span>Flexible</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ville">Ville *</label>
+                    <input type="text" id="ville" placeholder="Ex: Paris, Lyon, Toulouse..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Moyen de contact préféré *</label>
+                    <select id="contact" required>
+                        <option value="">Sélectionnez un moyen</option>
+                        <option value="email">Email</option>
+                        <option value="telephone">Téléphone</option>
+                        <option value="messagerie">Messagerie SkillSwap</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">Publier l'annonce</button>
+                    <button type="reset" class="btn btn-outline">Effacer le formulaire</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Conseils -->
+    <section class="tips-section">
+        <div class="container">
+            <h2>Conseils pour une bonne annonce</h2>
+            <div class="tips">
+                <div class="tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Soyez précis</h3>
+                    <p>Détaillez exactement ce que vous proposez ou cherchez.</p>
+                </div>
+                <div class="tip">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Indiquez vos disponibilités</h3>
+                    <p>Cela facilitera la planification des échanges.</p>
+                </div>
+                <div class="tip">
+                    <i class="fas fa-smile"></i>
+                    <h3>Soyez ouvert</h3>
+                    <p>N'hésitez pas à proposer ou demander plusieurs compétences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>SkillSwap</span>
+                </div>
+                <p>La plateforme d'échange de compétences entre étudiants. Apprenez, enseignez, partagez.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="annonce.html">Annonces</a></li>
+                    <li><a href="publier.html">Publier une annonce</a></li>
+                    <li><a href="dashbord.html">Tableau de bord</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Légal</h3>
+                <ul>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contact@skillswap.fr</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 SkillSwap. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord - SkillSwap</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>SkillSwap</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="annonce.html">Annonces</a></li>
+                    <li><a href="publier.html">Publier</a></li>
+                    <li><a href="dashbord.html" class="active">Tableau de bord</a></li>
+                  
+                </ul>
+                <button class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Tableau de bord</h1>
+        <p>Gérez vos annonces et vos échanges</p>
+    </section>
+
+    <!-- Profil utilisateur -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-layout">
+                <!-- Sidebar -->
+                <aside class="dashboard-sidebar">
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-info">
+                            <h3>Marie Dupont</h3>
+                            <p>Étudiante en informatique</p>
+                            <p class="user-location"><i class="fas fa-map-marker-alt"></i> Paris</p>
+                        </div>
+                    </div>
+                    <nav class="dashboard-nav">
+                        <ul>
+                            <li><a href="#mes-annonces" class="active"><i class="fas fa-bullhorn"></i> Mes annonces</a></li>
+                            <li><a href="#mes-messages"><i class="fas fa-envelope"></i> Mes messages</a></li>
+                            <li><a href="#parametres"><i class="fas fa-cog"></i> Paramètres</a></li>
+                            <li><a href="#aide"><i class="fas fa-question-circle"></i> Aide</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- Main content -->
+                <main class="dashboard-content">
+                    <!-- Mes annonces -->
+                    <section id="mes-annonces" class="dashboard-section-content active">
+                        <div class="section-header">
+                            <h2>Mes annonces</h2>
+                            <a href="publier.html" class="btn btn-primary">Nouvelle annonce</a>
+                        </div>
+                        
+                        <div class="annonces-list" id="user-annonces">
+                            <!-- Les annonces de l'utilisateur seront chargées ici -->
+                        </div>
+                    </section>
+
+                    <!-- Mes messages -->
+                    <section id="mes-messages" class="dashboard-section-content">
+                        <div class="section-header">
+                            <h2>Mes messages</h2>
+                        </div>
+                        
+                        <div class="messages-list">
+                            <div class="message-card">
+                                <div class="message-header">
+                                    <div class="message-sender">
+                                        <div class="sender-avatar">
+                                            <i class="fas fa-user-circle"></i>
+                                        </div>
+                                        <div class="sender-info">
+                                            <h4>Thomas Martin</h4>
+                                            <p>Intéressé par: Cours de Python</p>
+                                        </div>
+                                    </div>
+                                    <div class="message-date">12/10/2023</div>
+                                </div>
+                                <div class="message-content">
+                                    <p>Bonjour Marie, je suis intéressé par vos cours de Python. Je peux vous proposer des cours de guitare en échange. Êtes-vous disponible ce week-end ?</p>
+                                </div>
+                                <div class="message-actions">
+                                    <button class="btn btn-small">Répondre</button>
+                                </div>
+                            </div>
+                            
+                            <div class="message-card">
+                                <div class="message-header">
+                                    <div class="message-sender">
+                                        <div class="sender-avatar">
+                                            <i class="fas fa-user-circle"></i>
+                                        </div>
+                                        <div class="sender-info">
+                                            <h4>Sophie Leroy</h4>
+                                            <p>À propos: Cours d'espagnol</p>
+                                        </div>
+                                    </div>
+                                    <div class="message-date">10/10/2023</div>
+                                </div>
+                                <div class="message-content">
+                                    <p>Salut ! J'ai vu que vous cherchiez à apprendre l'espagnol. Je suis native et je pourrais vous donner des cours. En échange, j'aimerais apprendre les bases de la programmation.</p>
+                                </div>
+                                <div class="message-actions">
+                                    <button class="btn btn-small">Répondre</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Paramètres -->
+                    <section id="parametres" class="dashboard-section-content">
+                        <div class="section-header">
+                            <h2>Paramètres du compte</h2>
+                        </div>
+                        
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label for="user-name">Nom complet</label>
+                                <input type="text" id="user-name" value="Marie Dupont">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-email">Email</label>
+                                <input type="email" id="user-email" value="marie.dupont@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-ville">Ville</label>
+                                <input type="text" id="user-ville" value="Paris">
+                            </div>
+                            <div class="form-group">
+                                <label for="user-bio">Bio</label>
+                                <textarea id="user-bio" rows="4">Étudiante en informatique passionnée par la programmation et la musique. J'aimerais échanger mes compétences en Python contre des cours de guitare ou d'espagnol.</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="user-competences">Mes compétences</label>
+                                <input type="text" id="user-competences" value="Python, HTML/CSS, JavaScript, Algorithmie">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                        </form>
+                    </section>
+
+                    <!-- Aide -->
+                    <section id="aide" class="dashboard-section-content">
+                        <div class="section-header">
+                            <h2>Aide & Support</h2>
+                        </div>
+                        
+                        <div class="help-content">
+                            <div class="help-item">
+                                <h3><i class="fas fa-question-circle"></i> Comment fonctionne SkillSwap ?</h3>
+                                <p>SkillSwap est une plateforme d'échange de compétences entre étudiants. Vous proposez d'enseigner une compétence que vous maîtrisez et en échange, vous recevez des cours dans un autre domaine.</p>
+                            </div>
+                            <div class="help-item">
+                                <h3><i class="fas fa-shield-alt"></i> Comment assurer la sécurité des échanges ?</h3>
+                                <p>Nous recommandons de toujours échanger dans des lieux publics pour les premières rencontres et de vérifier les profils des autres utilisateurs. Notre système de notation sera bientôt disponible.</p>
+                            </div>
+                            <div class="help-item">
+                                <h3><i class="fas fa-comments"></i> Comment contacter le support ?</h3>
+                                <p>Pour toute question, vous pouvez nous contacter à l'adresse support@skillswap.fr. Nous répondons généralement dans les 24h.</p>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>SkillSwap</span>
+                </div>
+                <p>La plateforme d'échange de compétences entre étudiants. Apprenez, enseignez, partagez.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="annonce.html">Annonces</a></li>
+                    <li><a href="publier.html">Publier une annonce</a></li>
+                    <li><a href="dashbord.html">Tableau de bord</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Légal</h3>
+                <ul>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contact@skillswap.fr</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 SkillSwap. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap - Échange de compétences entre étudiants</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>SkillSwap</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li><a href="annonce.html">Annonces</a></li>
+                    <li><a href="publier.html">Publier</a></li>
+                    <li><a href="dashbord.html">Tableau de bord</a></li>
+                    
+                </ul>
+                <button class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Échangez vos compétences entre étudiants</h1>
+            <p class="hero-subtitle">Proposez d'enseigner ce que vous maîtrisez et recevez des cours dans un autre domaine. 100% gratuit, 100% collaboratif.</p>
+            <div class="hero-buttons">
+                <a href="annonce.html" class="btn btn-primary">Voir les annonces</a>
+                <a href="publier.html" class="btn btn-secondary">Publier une annonce</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="Étudiants collaborant">
+        </div>
+    </section>
+
+    <!-- Comment ça marche -->
+    <section class="section how-it-works">
+        <h2 class="section-title">Comment ça marche ?</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>1. Créez votre profil</h3>
+                <p>Inscrivez-vous gratuitement et listez vos compétences.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3>2. Publiez une annonce</h3>
+                <p>Proposez d'enseigner une compétence ou demandez à en apprendre une.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <h3>3. Échangez</h3>
+                <p>Connectez-vous avec d'autres étudiants et organisez vos échanges.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Témoignages -->
+    <section class="section testimonials">
+        <h2 class="section-title">Ce que disent nos utilisateurs</h2>
+        <div class="testimonial-cards">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Grâce à SkillSwap, j'ai pu apprendre la guitare en échange de cours de Python. Incroyable expérience !"</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="author-info">
+                        <h4>Marie L.</h4>
+                        <p>Étudiante en informatique, Paris</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"J'ai enseigné l'espagnol à deux personnes et en retour j'ai pris des cours de photographie. Génial concept !"</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="author-info">
+                        <h4>Thomas R.</h4>
+                        <p>Étudiant en langues, Lyon</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"Plateforme intuitive et communauté bienveillante. J'ai trouvé un partenaire pour échanger des compétences en design et marketing."</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="author-info">
+                        <h4>Sophie K.</h4>
+                        <p>Étudiante en design, Toulouse</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catégories populaires -->
+    <section class="section categories">
+        <h2 class="section-title">Catégories populaires</h2>
+        <div class="category-tags">
+            <span class="category-tag">Informatique</span>
+            <span class="category-tag">Langues</span>
+            <span class="category-tag">Musique</span>
+            <span class="category-tag">Art & Design</span>
+            <span class="category-tag">Sport</span>
+            <span class="category-tag">Cuisine</span>
+            <span class="category-tag">Photographie</span>
+            <span class="category-tag">Sciences</span>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="logo">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>SkillSwap</span>
+                </div>
+                <p>La plateforme d'échange de compétences entre étudiants. Apprenez, enseignez, partagez.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Navigation</h3>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="annonce.html">Annonces</a></li>
+                    <li><a href="publier.html">Publier une annonce</a></li>
+                    <li><a href="dashbord.html">Tableau de bord</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Légal</h3>
+                <ul>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> contact@skillswap.fr</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 SkillSwap. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
