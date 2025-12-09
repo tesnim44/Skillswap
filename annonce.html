@@ -4,9 +4,472 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Annonces - SkillSwap</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et styles globaux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #000000;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+      
+        /* Navigation - COULEUR MODIFIÉE (plus claire) */
+        .navbar {
+            background-color: #fafaf9; /* Changé de #000000 à #2c3e50 (bleu foncé) */
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: #b0f582;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #a3e635;
+        }
+    
+        
+        /* Page Header - COULEUR MODIFIÉE (plus claire) */
+        .page-header {
+            background-color: #fafaf9; /* Changé de #000000 à #34495e (bleu-gris) */
+            color: #000000;
+            padding: 100px 0 40px;
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            color: #b0f582;
+        }
+        /* Filtres Section */
+        .filters-section {
+            background-color: #fafaf9;
+            padding: 30px 0;
+            margin: 30px auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+            max-width: 1200px;
+        }
+        
+        .filters-section h2 {
+            color: #000000;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            color: #333333;
+            font-size: 0.95rem;
+        }
+        
+        .filter-group select {
+            padding: 12px 15px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #ffffff;
+            color: #333333;
+            transition: border-color 0.3s ease;
+        }
+        
+        .filter-group select:focus {
+            outline: none;
+            border-color: #b0f582;
+            box-shadow: 0 0 0 3px rgba(176, 245, 130, 0.1);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #cccccc;
+            color: #333333;
+        }
+        
+        .btn-outline:hover {
+            background-color: #f5fff0;
+            border-color: #b0f582;
+        }
+        
+        .btn-primary {
+            background-color: #b0f582;
+            color: #000000;
+            border: 1px solid #94d867;
+        }
+        
+        .btn-primary:hover {
+            background-color: #94d867;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(176, 245, 130, 0.3);
+        }
+        
+        /* Annonces Section */
+        .annonces-section {
+            padding: 40px 0;
+        }
+        
+        .annonces-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .annonce-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .annonce-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(176, 245, 130, 0.15);
+        }
+        
+        .annonce-header {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .annonce-type {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .annonce-type.propose {
+            background-color: #e8f7d8;
+            color: #2c3e50;
+            border: 1px solid #b0f582;
+        }
+        
+        .annonce-type.cherche {
+            background-color: #e0f0ff;
+            color: #2c3e50;
+            border: 1px solid #7ab7ff;
+        }
+        
+        .annonce-title {
+            font-size: 1.3rem;
+            color: #000000;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .annonce-category {
+            display: inline-block;
+            background-color: #f0f8e8;
+            color: #000000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            border: 1px solid #b0f582;
+        }
+        
+        .annonce-description {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .annonce-description p {
+            color: #333333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .annonce-competences {
+            margin-top: 15px;
+        }
+        
+        .competence-tag {
+            display: inline-block;
+            background-color: #f5f5f5;
+            color: #333333;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .annonce-footer {
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .annonce-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #b0f582;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000000;
+            font-weight: bold;
+        }
+        
+        .user-info h4 {
+            color: #000000;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+        
+        .user-info p {
+            color: #666666;
+            font-size: 0.85rem;
+        }
+        
+        .annonce-date {
+            color: #666666;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+      
+          /* Footer */
+        footer {
+            background-color: #fafaf9;
+            color: #1c1917;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            color: #1c1917;
+        }
+
+        .footer-description {
+            color: #57534e;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #57534e;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #1c1917;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #a8a29e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-love {
+            color: #57534e;
+        }
+
+        .footer-love i {
+            color: #ef4444;
+        }
+
+        .footer-copyright {
+            color: #78716c;
+        }
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666666;
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            color: #b0f582;
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-menu {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .annonces-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .page-header {
+                padding: 120px 0 40px;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                min-width: 100%;
+            }
+            
+            .annonces-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .annonce-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -22,11 +485,7 @@
                     <li><a href="annonce.html" class="active">Annonces</a></li>
                     <li><a href="publier.html">Publier</a></li>
                     <li><a href="dashbord.html">Tableau de bord</a></li>
-                    
                 </ul>
-                <button class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
         </nav>
     </header>
@@ -78,46 +537,338 @@
         </div>
     </section>
 
-    <!-- Footer -->
+<!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <div class="logo">
+                <div class="logo" style="color: #1c1917; margin-bottom: 1rem;">
                     <i class="fas fa-exchange-alt"></i>
                     <span>SkillSwap</span>
                 </div>
-                <p>La plateforme d'échange de compétences entre étudiants. Apprenez, enseignez, partagez.</p>
+                <p class="footer-description">Exchange skills with fellow students. Teach what you know, learn what you love.</p>
             </div>
+            
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3>Platform</h3>
                 <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="annonce.html">Annonces</a></li>
-                    <li><a href="publier.html">Publier une annonce</a></li>
-                    <li><a href="dashbord.html">Tableau de bord</a></li>
+                    <li><a href="annonce.html">Browse Skills</a></li>
+                    <li><a href="publier.html">Post a Skill</a></li>
+                    <li><a href="dashbord.html">Dashboard</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
-                <h3>Légal</h3>
+                <h3>Categories</h3>
                 <ul>
-                    <li><a href="#">Conditions d'utilisation</a></li>
-                    <li><a href="#">Politique de confidentialité</a></li>
-                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="annonce.html">Technology</a></li>
+                    <li><a href="annonce.html">Music</a></li>
+                    <li><a href="annonce.html">Languages</a></li>
+                    <li><a href="annonce.html">Art & Design</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
-                <h3>Contact</h3>
+                <h3>Community</h3>
                 <ul>
-                    <li><i class="fas fa-envelope"></i> contact@skillswap.fr</li>
-                    <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
+                    <li><a href="index.html">About Us</a></li>
+                    <li>Guidelines</li>
+                    <li>Support</li>
                 </ul>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p>&copy; 2023 SkillSwap. Tous droits réservés.</p>
+            <p class="footer-love">Made with <i class="fas fa-heart"></i> by students, for students</p>
+            <p class="footer-copyright">© 2024 SkillSwap. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Données des annonces
+        const annoncesData = [
+            {
+                id: 1,
+                type: "propose",
+                title: "Cours de Python pour débutants",
+                category: "Informatique",
+                description: "Étudiant en informatique propose des cours de Python pour débutants. Je peux vous apprendre les bases de la programmation, les structures de données et comment créer vos premiers projets. Idéal pour ceux qui souhaitent se lancer dans le développement web ou la data science.",
+                competences: ["Python", "Algorithmie", "Programmation"],
+                user: {
+                    name: "Marie Dupont",
+                    location: "Paris",
+                    initials: "MD"
+                },
+                date: "15/10/2023"
+            },
+            {
+                id: 2,
+                type: "cherche",
+                title: "Recherche cours de guitare",
+                category: "Musique",
+                description: "Je recherche quelqu'un pour m'apprendre les bases de la guitare acoustique. Je suis débutant complet et j'aimerais apprendre à jouer quelques accords et mélodies simples. En échange, je peux proposer des cours d'informatique ou d'anglais.",
+                competences: ["Guitare", "Musique"],
+                user: {
+                    name: "Thomas Martin",
+                    location: "Lyon",
+                    initials: "TM"
+                },
+                date: "12/10/2023"
+            },
+            {
+                id: 3,
+                type: "propose",
+                title: "Cours d'anglais conversationnel",
+                category: "Langues",
+                description: "Étudiante bilingue propose des cours d'anglais conversationnel. Je peux vous aider à améliorer votre prononciation, votre vocabulaire et votre aisance à l'oral. Nous pouvons discuter de sujets variés selon vos centres d'intérêt.",
+                competences: ["Anglais", "Conversation", "Prononciation"],
+                user: {
+                    name: "Sophie Leroy",
+                    location: "Marseille",
+                    initials: "SL"
+                },
+                date: "10/10/2023"
+            },
+            {
+                id: 4,
+                type: "cherche",
+                title: "Recherche aide en mathématiques",
+                category: "Sciences",
+                description: "Je cherche de l'aide en mathématiques, particulièrement en algèbre et en analyse. Je suis en première année de licence et j'ai des difficultés avec certains concepts. En échange, je peux proposer des cours de photographie ou de retouche photo.",
+                competences: ["Mathématiques", "Algèbre", "Analyse"],
+                user: {
+                    name: "Alexandre Petit",
+                    location: "Toulouse",
+                    initials: "AP"
+                },
+                date: "08/10/2023"
+            },
+            {
+                id: 5,
+                type: "propose",
+                title: "Cours de photographie",
+                category: "Art",
+                description: "Photographe amateur propose des cours de photographie de base. Je peux vous apprendre les réglages de base (ouverture, vitesse, ISO), la composition, et comment tirer le meilleur de votre appareil. Possibilité de sorties photo en extérieur.",
+                competences: ["Photographie", "Composition", "Retouche"],
+                user: {
+                    name: "Camille Bernard",
+                    location: "Bordeaux",
+                    initials: "CB"
+                },
+                date: "05/10/2023"
+            },
+            {
+                id: 6,
+                type: "cherche",
+                title: "Recherche cours de cuisine italienne",
+                category: "Cuisine",
+                description: "Je recherche quelqu'un pour m'enseigner les bases de la cuisine italienne authentique. Je souhaite apprendre à préparer des pâtes fraîches, des sauces traditionnelles et des desserts italiens. En échange, je peux proposer des cours de yoga ou de méditation.",
+                competences: ["Cuisine", "Italien", "Pâtes fraîches"],
+                user: {
+                    name: "Julie Moreau",
+                    location: "Nice",
+                    initials: "JM"
+                },
+                date: "03/10/2023"
+            },
+            {
+                id: 7,
+                type: "propose",
+                title: "Cours de yoga et méditation",
+                category: "Sport",
+                description: "Professeure de yoga certifiée propose des cours de yoga et méditation pour débutants et intermédiaires. Séances adaptées à tous les niveaux, avec un accent sur la respiration et la relaxation. Cours en ligne ou en présentiel.",
+                competences: ["Yoga", "Méditation", "Bien-être"],
+                user: {
+                    name: "Élise Dubois",
+                    location: "Lille",
+                    initials: "ED"
+                },
+                date: "01/10/2023"
+            },
+            {
+                id: 8,
+                type: "cherche",
+                title: "Recherche aide en design graphique",
+                category: "Art",
+                description: "Je recherche quelqu'un pour m'initier aux bases du design graphique et à l'utilisation de Photoshop/Illustrator. Je souhaite créer des visuels pour mes projets personnels. En échange, je peux proposer des cours de français ou d'histoire.",
+                competences: ["Design", "Photoshop", "Illustrator"],
+                user: {
+                    name: "Lucas Simon",
+                    location: "Strasbourg",
+                    initials: "LS"
+                },
+                date: "28/09/2023"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser les annonces
+            loadAnnonces();
+            
+            // Navigation principale
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (currentPage === linkPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Gestion des filtres
+            const categoryFilter = document.getElementById('category-filter');
+            const domainFilter = document.getElementById('domain-filter');
+            const resetButton = document.getElementById('reset-filters');
+            
+            categoryFilter.addEventListener('change', filterAnnonces);
+            domainFilter.addEventListener('change', filterAnnonces);
+            
+            resetButton.addEventListener('click', function() {
+                categoryFilter.value = 'all';
+                domainFilter.value = 'all';
+                filterAnnonces();
+            });
+            
+            // Ajouter le style pour les icônes Font Awesome
+            const style = document.createElement('style');
+            style.textContent = `
+                .far, .fas {
+                    font-family: 'Font Awesome 6 Free';
+                }
+                
+                .fa-calendar:before {
+                    content: "\\f133";
+                }
+                
+                .fa-search:before {
+                    content: "\\f002";
+                }
+                
+                .fa-exchange-alt:before {
+                    content: "\\f362";
+                }
+                
+                .fa-envelope:before {
+                    content: "\\f0e0";
+                }
+                
+                .fa-map-marker-alt:before {
+                    content: "\\f3c5";
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        function loadAnnonces(filteredData = annoncesData) {
+            const container = document.getElementById('annonces-container');
+            
+            if (filteredData.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>Aucune annonce trouvée</h3>
+                        <p>Aucune annonce ne correspond à vos critères de recherche.</p>
+                        <button id="reset-all-filters" class="btn btn-primary" style="margin-top: 20px;">Afficher toutes les annonces</button>
+                    </div>
+                `;
+                
+                // Re-attacher l'événement au bouton de réinitialisation
+                document.querySelector('#reset-all-filters').addEventListener('click', function() {
+                    document.getElementById('category-filter').value = 'all';
+                    document.getElementById('domain-filter').value = 'all';
+                    loadAnnonces(annoncesData);
+                });
+                
+                return;
+            }
+            
+            let annoncesHTML = '';
+            
+            filteredData.forEach(annonce => {
+                annoncesHTML += `
+                    <article class="annonce-card">
+                        <div class="annonce-header">
+                            <span class="annonce-type ${annonce.type}">
+                                ${annonce.type === 'propose' ? 'Je propose' : 'Je cherche'}
+                            </span>
+                            <h3 class="annonce-title">${annonce.title}</h3>
+                            <span class="annonce-category">${annonce.category}</span>
+                        </div>
+                        <div class="annonce-description">
+                            <p>${annonce.description}</p>
+                            <div class="annonce-competences">
+                                ${annonce.competences.map(competence => 
+                                    `<span class="competence-tag">${competence}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                        <div class="annonce-footer">
+                            <div class="annonce-user">
+                                <div class="user-avatar">${annonce.user.initials}</div>
+                                <div class="user-info">
+                                    <h4>${annonce.user.name}</h4>
+                                    <p>${annonce.user.location}</p>
+                                </div>
+                            </div>
+                            <div class="annonce-date">
+                                <i class="far fa-calendar"></i>
+                                <span>${annonce.date}</span>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            });
+            
+            container.innerHTML = annoncesHTML;
+        }
+
+        function filterAnnonces() {
+            const categoryValue = document.getElementById('category-filter').value;
+            const domainValue = document.getElementById('domain-filter').value;
+            
+            let filteredAnnonces = [...annoncesData];
+            
+            // Filtrer par catégorie (propose/cherche)
+            if (categoryValue !== 'all') {
+                filteredAnnonces = filteredAnnonces.filter(annonce => annonce.type === categoryValue);
+            }
+            
+            // Filtrer par domaine
+            if (domainValue !== 'all') {
+                filteredAnnonces = filteredAnnonces.filter(annonce => {
+                    // Pour une correspondance plus intelligente
+                    const domaine = domainValue.toLowerCase();
+                    const categorie = annonce.category.toLowerCase();
+                    
+                    // Correspondances directes
+                    if (domaine === 'informatique' && categorie.includes('informatique')) return true;
+                    if (domaine === 'musique' && categorie.includes('musique')) return true;
+                    if (domaine === 'langues' && categorie.includes('langues')) return true;
+                    if (domaine === 'art' && (categorie.includes('art') || categorie.includes('design'))) return true;
+                    if (domaine === 'sport' && categorie.includes('sport')) return true;
+                    if (domaine === 'cuisine' && categorie.includes('cuisine')) return true;
+                    if (domaine === 'sciences' && (categorie.includes('sciences') || categorie.includes('math'))) return true;
+                    
+                    // Pour "autres", on inclut tout ce qui ne correspond pas aux autres catégories
+                    if (domaine === 'autres') {
+                        const autresDomaines = ['informatique', 'musique', 'langues', 'art', 'design', 'sport', 'cuisine', 'sciences', 'math'];
+                        return !autresDomaines.some(d => categorie.includes(d));
+                    }
+                    
+                    return false;
+                });
+            }
+            
+            loadAnnonces(filteredAnnonces);
+        }
+
+        // Fonction pour formater la date
+        function formatDate(date) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return new Date(date).toLocaleDateString('fr-FR', options);
+        }
+    </script>
 </body>
 </html>

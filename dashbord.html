@@ -4,9 +4,804 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de bord - SkillSwap</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset et styles globaux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation - COULEUR MODIFIÉE (plus claire) */
+        .navbar {
+            background-color: #fafaf9; /* Changé de #000000 à #2c3e50 (bleu foncé) */
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            color: #b0f582;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #a3e635;
+        }
+    
+        
+        /* Page Header - COULEUR MODIFIÉE (plus claire) */
+        .page-header {
+            background-color: #fafaf9; /* Changé de #000000 à #34495e (bleu-gris) */
+            color: #000000;
+            padding: 100px 0 40px;
+            text-align: center;
+            margin-top: 0;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            color: #b0f582;
+        }
+        
+        /* Dashboard Layout */
+        .dashboard-layout {
+            display: flex;
+            gap: 30px;
+            margin: 40px auto;
+        }
+        
+        /* Dashboard Sidebar */
+        .dashboard-sidebar {
+            width: 280px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .user-profile {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .user-avatar {
+            font-size: 4rem;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+        
+        .user-info h3 {
+            color: #000000;
+            margin-bottom: 5px;
+        }
+        
+        .user-info p {
+            color: #666666;
+            margin-bottom: 5px;
+        }
+        
+        .user-location {
+            color: #000000 !important;
+            font-size: 0.9rem;
+        }
+        
+        /* Dashboard Navigation */
+        .dashboard-nav ul {
+            list-style: none;
+        }
+        
+        .dashboard-nav li {
+            margin-bottom: 5px;
+        }
+        
+        .dashboard-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            color: #666666;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .dashboard-nav a:hover,
+        .dashboard-nav a.active {
+            background-color: #f5fff0;
+            color: #000000;
+            border-left: 4px solid #b0f582;
+        }
+        
+        .dashboard-nav a i {
+            width: 20px;
+            text-align: center;
+            color: #b0f582;
+        }
+        
+        /* Dashboard Content */
+        .dashboard-content {
+            flex: 1;
+        }
+        
+        .dashboard-section-content {
+            display: none;
+        }
+        
+        .dashboard-section-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f8e8;
+        }
+        
+        .section-header h2 {
+            color: #000000;
+            font-size: 1.8rem;
+        }
+        
+        /* Stats Container */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(176, 245, 130, 0.15);
+        }
+        
+        .stat-card h3 {
+            font-size: 0.95rem;
+            color: #666666;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .stat-card .value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .change {
+            font-size: 0.9rem;
+            color: #333333;
+        }
+        
+        .stat-card:nth-child(1) {
+            border-top: 4px solid #b0f582;
+        }
+        
+        .stat-card:nth-child(2) {
+            border-top: 4px solid #000000;
+        }
+        
+        .stat-card:nth-child(3) {
+            border-top: 4px solid #94d867;
+        }
+        
+        .stat-card:nth-child(4) {
+            border-top: 4px solid #333333;
+        }
+        
+        /* Announcements Container */
+        .announcements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .announcement-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .announcement-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .announcement-header h3 {
+            font-size: 1.2rem;
+            color: #000000;
+            font-weight: 700;
+        }
+        
+        .announcement-count {
+            background-color: #f0f8e8;
+            color: #000000;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #b0f582;
+        }
+        
+        .announcement-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .announcement-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #cccccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .checkbox.checked {
+            background-color: #b0f582;
+            border-color: #94d867;
+            color: #000000;
+        }
+        
+        .announcement-item p {
+            flex: 1;
+            color: #333333;
+            margin: 0;
+        }
+        
+        /* Request Card */
+        .request-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .request-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .request-title {
+            font-size: 1.3rem;
+            color: #000000;
+            font-weight: 700;
+        }
+        
+        .request-category {
+            background-color: #f0f8e8;
+            color: #000000;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid #b0f582;
+        }
+        
+        .request-description {
+            color: #333333;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        .request-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+        
+        .request-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .request-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* Messages Section */
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .message-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .message-sender {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .sender-avatar {
+            font-size: 2.5rem;
+            color: #b0f582;
+        }
+        
+        .sender-info h4 {
+            color: #000000;
+            margin-bottom: 5px;
+        }
+        
+        .sender-info p {
+            color: #666666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .message-date {
+            color: #666666;
+            font-size: 0.9rem;
+        }
+        
+        .message-content {
+            color: #333333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .message-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        /* Settings Form */
+        .settings-form {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #000000;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background-color: #ffffff;
+            color: #333333;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #b0f582;
+            box-shadow: 0 0 0 3px rgba(176, 245, 130, 0.1);
+        }
+        
+        /* Help Section */
+        .help-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .help-item {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .help-item h3 {
+            color: #000000;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .help-item h3 i {
+            color: #b0f582;
+        }
+        
+        .help-item p {
+            color: #666666;
+            line-height: 1.6;
+        }
+        
+        /* Annonces List */
+        .annonces-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .annonce-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .annonce-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .annonce-header h3 {
+            color: #000000;
+            font-size: 1.2rem;
+        }
+        
+        .annonce-category {
+            background-color: #f0f8e8;
+            color: #000000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid #b0f582;
+        }
+        
+        .annonce-description p {
+            color: #333333;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .annonce-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+        
+        .annonce-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .annonce-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666666;
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            color: #b0f582;
+            margin-bottom: 20px;
+        }
+        
+        .empty-state h3 {
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #cccccc;
+            color: #333333;
+        }
+        
+        .btn-outline:hover {
+            background-color: #f5fff0;
+            border-color: #b0f582;
+        }
+        
+        .btn-primary {
+            background-color: #b0f582;
+            color: #000000;
+            border: 1px solid #94d867;
+        }
+        
+        .btn-primary:hover {
+            background-color: #94d867;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(176, 245, 130, 0.3);
+        }
+        
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #000000;
+            margin: 30px 0 20px 0;
+            font-weight: 700;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f8e8;
+        }
+        
+       
+         /* Footer */
+        footer {
+            background-color: #fafaf9;
+            color: #1c1917;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            color: #1c1917;
+        }
+
+        .footer-description {
+            color: #57534e;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #57534e;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #1c1917;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #a8a29e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-love {
+            color: #57534e;
+        }
+
+        .footer-love i {
+            color: #ef4444;
+        }
+
+        .footer-copyright {
+            color: #78716c;
+        }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .dashboard-layout {
+                flex-direction: column;
+            }
+            
+            .dashboard-sidebar {
+                width: 100%;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-menu {
+                gap: 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .announcements-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .request-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .request-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .message-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .page-header {
+                padding: 120px 0 40px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -22,11 +817,7 @@
                     <li><a href="annonce.html">Annonces</a></li>
                     <li><a href="publier.html">Publier</a></li>
                     <li><a href="dashbord.html" class="active">Tableau de bord</a></li>
-                  
                 </ul>
-                <button class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </button>
             </div>
         </nav>
     </header>
@@ -72,6 +863,60 @@
                             <a href="publier.html" class="btn btn-primary">Nouvelle annonce</a>
                         </div>
                         
+                        <!-- Stats Cards -->
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <h3>Annonces actives</h3>
+                                <div class="value" id="stat-active">1</div>
+                                <div class="change">+0 cette semaine</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <h3>Messages</h3>
+                                <div class="value" id="stat-messages">2</div>
+                                <div class="change">+1 cette semaine</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <h3>Non lus</h3>
+                                <div class="value" id="stat-unread">1</div>
+                                <div class="change">+1 cette semaine</div>
+                            </div>
+                            
+                            <div class="stat-card">
+                                <h3>Échanges terminés</h3>
+                                <div class="value" id="stat-completed">0</div>
+                                <div class="change">Aucun changement</div>
+                            </div>
+                        </div>
+                        
+                       
+                        
+                        <h3 class="section-title">Demandes récentes</h3>
+                        <div class="request-card">
+                            <div class="request-header">
+                                <h3 class="request-title">Recherche un tuteur en calcul</h3>
+                                <span class="request-category">Académique</span>
+                            </div>
+                            
+                            <p class="request-description">
+                                Je peine avec le calcul et j'ai besoin d'aide avant les examens finaux. Je recherche quelqu'un de patient qui peut expliquer clairement les concepts. J'ai particulièrement besoin d'aide avec les limites, les dérivées et l'intégration. Je préfère quelqu'un disponible pour 2-3 sessions par semaine. Je suis un apprenant visuel donc les diagrammes et exemples seraient très utiles.
+                            </p>
+                            
+                            <div class="request-footer">
+                                <div class="request-date">
+                                    <i class="far fa-clock"></i>
+                                    <span>Publié il y a 4 jours</span>
+                                </div>
+                                
+                                <div class="request-actions">
+                                    <button class="btn btn-outline">Enregistrer pour plus tard</button>
+                                    <button class="btn btn-primary">Répondre à la demande</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Liste des annonces utilisateur -->
                         <div class="annonces-list" id="user-annonces">
                             <!-- Les annonces de l'utilisateur seront chargées ici -->
                         </div>
@@ -189,42 +1034,229 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <div class="logo">
+                <div class="logo" style="color: #1c1917; margin-bottom: 1rem;">
                     <i class="fas fa-exchange-alt"></i>
                     <span>SkillSwap</span>
                 </div>
-                <p>La plateforme d'échange de compétences entre étudiants. Apprenez, enseignez, partagez.</p>
+                <p class="footer-description">Exchange skills with fellow students. Teach what you know, learn what you love.</p>
             </div>
+            
             <div class="footer-section">
-                <h3>Navigation</h3>
+                <h3>Platform</h3>
                 <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="annonce.html">Annonces</a></li>
-                    <li><a href="publier.html">Publier une annonce</a></li>
-                    <li><a href="dashbord.html">Tableau de bord</a></li>
+                    <li><a href="annonce.html">Browse Skills</a></li>
+                    <li><a href="publier.html">Post a Skill</a></li>
+                    <li><a href="dashbord.html">Dashboard</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
-                <h3>Légal</h3>
+                <h3>Categories</h3>
                 <ul>
-                    <li><a href="#">Conditions d'utilisation</a></li>
-                    <li><a href="#">Politique de confidentialité</a></li>
-                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="annonce.html">Technology</a></li>
+                    <li><a href="annonce.html">Music</a></li>
+                    <li><a href="annonce.html">Languages</a></li>
+                    <li><a href="annonce.html">Art & Design</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
-                <h3>Contact</h3>
+                <h3>Community</h3>
                 <ul>
-                    <li><i class="fas fa-envelope"></i> contact@skillswap.fr</li>
-                    <li><i class="fas fa-map-marker-alt"></i> Paris, France</li>
+                    <li><a href="index.html">About Us</a></li>
+                    <li>Guidelines</li>
+                    <li>Support</li>
                 </ul>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p>&copy; 2023 SkillSwap. Tous droits réservés.</p>
+            <p class="footer-love">Made with <i class="fas fa-heart"></i> by students, for students</p>
+            <p class="footer-copyright">© 2024 SkillSwap. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation du dashboard
+            const navLinks = document.querySelectorAll('.dashboard-nav a');
+            const sections = document.querySelectorAll('.dashboard-section-content');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Retirer la classe active de tous les liens
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Ajouter la classe active au lien cliqué
+                    this.classList.add('active');
+                    
+                    // Cacher toutes les sections
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    
+                    // Afficher la section correspondante
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                });
+            });
+            
+            // Toggle checkboxes
+            document.querySelectorAll('.checkbox').forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    if (this.classList.contains('checked')) {
+                        this.classList.remove('checked');
+                        this.innerHTML = '';
+                    } else {
+                        this.classList.add('checked');
+                        this.innerHTML = '<i class="fas fa-check"></i>';
+                    }
+                });
+            });
+            
+            // Animer les statistiques
+            function animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    element.textContent = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+            
+            // Animer les stats au chargement
+            setTimeout(() => {
+                const statActive = document.getElementById('stat-active');
+                const statMessages = document.getElementById('stat-messages');
+                const statUnread = document.getElementById('stat-unread');
+                const statCompleted = document.getElementById('stat-completed');
+                
+                if (statActive) animateValue(statActive, 0, 1, 1000);
+                if (statMessages) animateValue(statMessages, 0, 2, 1200);
+                if (statUnread) animateValue(statUnread, 0, 1, 800);
+                if (statCompleted) animateValue(statCompleted, 0, 0, 500);
+            }, 500);
+            
+            // Charger les annonces de l'utilisateur
+            loadUserAnnonces();
+            
+            // Gestion du formulaire de paramètres
+            const settingsForm = document.querySelector('.settings-form');
+            if (settingsForm) {
+                settingsForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Vos paramètres ont été mis à jour avec succès !');
+                });
+            }
+            
+            // Gestion des boutons
+            document.querySelectorAll('.btn-outline').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    alert('Fonctionnalité à venir !');
+                });
+            });
+            
+            document.querySelectorAll('.btn-primary').forEach(btn => {
+                if (btn.textContent.includes('Répondre')) {
+                    btn.addEventListener('click', function() {
+                        alert('Formulaire de réponse à venir !');
+                    });
+                }
+            });
+            
+            // Navigation principale
+            const currentPage = window.location.pathname.split('/').pop();
+            const mainNavLinks = document.querySelectorAll('.nav-menu a');
+            
+            mainNavLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (currentPage === linkPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+        
+        function loadUserAnnonces() {
+            const userAnnoncesContainer = document.getElementById('user-annonces');
+            if (userAnnoncesContainer) {
+                const annonces = [
+                    {
+                        id: 1,
+                        title: "Cours de Python pour débutants",
+                        description: "Je propose des cours de Python pour débutants. Je peux vous apprendre les bases de la programmation et comment créer vos premiers projets.",
+                        category: "Informatique",
+                        date: "15/10/2023",
+                        status: "active"
+                    },
+                    {
+                        id: 2,
+                        title: "Recherche cours de guitare",
+                        description: "Je recherche quelqu'un pour m'apprendre les bases de la guitare. En échange, je peux proposer des cours d'informatique.",
+                        category: "Musique",
+                        date: "10/10/2023",
+                        status: "active"
+                    }
+                ];
+                
+                let annoncesHTML = '';
+                
+                if (annonces.length === 0) {
+                    annoncesHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Aucune annonce publiée</h3>
+                            <p>Vous n'avez pas encore publié d'annonce. Commencez par en créer une !</p>
+                            <a href="publier.html" class="btn btn-primary">Créer une annonce</a>
+                        </div>
+                    `;
+                } else {
+                    annonces.forEach(annonce => {
+                        annoncesHTML += `
+                            <div class="annonce-card">
+                                <div class="annonce-header">
+                                    <h3>${annonce.title}</h3>
+                                    <span class="annonce-category">${annonce.category}</span>
+                                </div>
+                                <div class="annonce-description">
+                                    <p>${annonce.description}</p>
+                                </div>
+                                <div class="annonce-footer">
+                                    <div class="annonce-date">
+                                        <i class="far fa-calendar"></i>
+                                        <span>Publié le ${annonce.date}</span>
+                                    </div>
+                                    <div class="annonce-actions">
+                                        <button class="btn btn-small btn-outline" onclick="editAnnonce(${annonce.id})">Modifier</button>
+                                        <button class="btn btn-small btn-primary" onclick="viewAnnonce(${annonce.id})">Voir</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                userAnnoncesContainer.innerHTML = annoncesHTML;
+            }
+        }
+        
+        function editAnnonce(id) {
+            alert(`Modifier l'annonce ${id} - Cette fonctionnalité sera bientôt disponible !`);
+        }
+        
+        function viewAnnonce(id) {
+            alert(`Voir l'annonce ${id} - Cette fonctionnalité sera bientôt disponible !`);
+        }
+    </script>
 </body>
 </html>
