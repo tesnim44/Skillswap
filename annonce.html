@@ -10,39 +10,39 @@
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box; 
             font-family: 'Segoe UI', system-ui, sans-serif;
         }
         
         body {
             background-color: #f5f5f5;
             color: #000000;
-            line-height: 1.6;
+            line-height: 1.6; /*hauteur de ligne améliorée pour la lisibilité */
         }
         
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+            margin: 0 auto; /* Centrer le conteneur */
+            padding: 0 20px; /* Espacement latéral */
+        }          /*t+b l+r*/
       
         /* Navigation - COULEUR MODIFIÉE (plus claire) */
         .navbar {
             background-color: #fafaf9; /* Changé de #000000 à #2c3e50 (bleu foncé) */
             color: white;
             padding: 15px 0;
-            position: fixed;
+            position: fixed; /*navbar fixe en haut même lors du scroll*/
             width: 100%;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+            z-index: 1000;/* Assurer que la navbar reste au-dessus des autres éléments */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+        }                /*dwn blur*/
         
         .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
+            display: flex;  /*organise les éléments en ligne */
+            justify-content: space-between; /*espace égal entre logo et menu*/
+            align-items: center; 
+            max-width: 1200px;/*limite la largeur du conteneur */
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -50,11 +50,11 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
+            gap: 10px;/*espace entre icône et texte */
+            font-size: 1.5rem; 
             font-weight: 700;
             color: #000000;
-            text-decoration: none;
+            text-decoration: none; /*supprime le soulignement par défaut car Par défaut, les liens sont soulignés par le navigateur. */
         }
         
         .logo i {
@@ -63,25 +63,23 @@
         
         .nav-menu {
             display: flex;
-            gap: 2rem;
-            list-style: none;
+            gap: 2rem; /*espace entre les éléments du menu */
+            list-style: none; /*supprime les puces de <ul> ou <ol> */
         }
 
         .nav-menu a {
             color: #000000;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: color 0.3s; 
         }
 
         .nav-menu a:hover {
             color: #a3e635;
-        }
-    
-        
-        /* Page Header - COULEUR MODIFIÉE (plus claire) */
+        }        
+        /* Page Header */
         .page-header {
-            background-color: #fafaf9; /* Changé de #000000 à #34495e (bleu-gris) */
+            background-color: #fafaf9;
             color: #000000;
             padding: 100px 0 40px;
             text-align: center;
@@ -102,10 +100,10 @@
             background-color: #fafaf9;
             padding: 30px 0;
             margin: 30px auto;
-            border-radius: 12px;
+            border-radius: 12px;/*(arrondir les coins) */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             border: 1px solid #e0e0e0;
-            max-width: 1200px;
+            max-width: 1200px; /* Limite la largeur du conteneur */
         }
         
         .filters-section h2 {
@@ -122,11 +120,11 @@
         }
         
         .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            flex: 1;
-            min-width: 200px;
+            display: flex; 
+            flex-direction: column; /*organise les éléments en colonne */
+            gap: 8px;/*espace entre le label et le select */
+            flex: 1;/*permet aux groupes de filtres de s'étendre également */
+            min-width: 200px; 
         }
         
         .filter-group label {
@@ -145,8 +143,8 @@
             transition: border-color 0.3s ease;
         }
         
-        .filter-group select:focus {
-            outline: none;
+        .filter-group select:focus {/*style lors de la mise au point */
+            outline: none; /*supprime le contour par défaut */
             border-color: #b0f582;
             box-shadow: 0 0 0 3px rgba(176, 245, 130, 0.1);
         }
@@ -156,8 +154,8 @@
             padding: 10px 20px;
             border-radius: 8px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            cursor: pointer; 
+            transition: all 0.3s ease;/*all: tells the browser to animate changes to every animatable CSS property (like color, opacity, transform, etc.) smoothly*/
             border: none;
             text-decoration: none;
             display: inline-block;
@@ -183,7 +181,7 @@
         
         .btn-primary:hover {
             background-color: #94d867;
-            transform: translateY(-2px);
+            transform: translateY(-2px);/*repositions an element vertically by moving it up by 2 pixels from its original position*/
             box-shadow: 0 4px 12px rgba(176, 245, 130, 0.3);
         }
         
@@ -194,20 +192,20 @@
         
         .annonces-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /*creates a responsive CSS Grid layout where columns automatically fit the container, each being at least 350px wide but also growing equally (using 1fr) to fill any remaining space, adapting smoothly to different screen sizes without fixed breakpoints. auto-fill creates as many columns as possible, even empty ones, while minmax(350px, 1fr) sets the size range: a minimum of 350px and a maximum of one fraction of available space*/
+            gap: 30px;/*espace entre les cartes d'annonces */
         }
         
         .annonce-card {
             background-color: #ffffff;
             border-radius: 12px;
-            overflow: hidden;
+            overflow: hidden; /*empêche le contenu de déborder des coins arrondis */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             border: 1px solid #e0e0e0;
             height: 100%;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /*organise le contenu en colonne */
         }
         
         .annonce-card:hover {
@@ -225,7 +223,7 @@
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: 600; /*ajouté pour une meilleure visibilité  defines the thickness (100->thick)(900->black)*/
             margin-bottom: 10px;
         }
         
@@ -261,7 +259,7 @@
         
         .annonce-description {
             padding: 20px;
-            flex-grow: 1;
+            flex-grow: 1; /*permet à cette section de prendre tout l'espace disponible restant */
         }
         
         .annonce-description p {
@@ -275,7 +273,7 @@
         }
         
         .competence-tag {
-            display: inline-block;
+            display: inline-block; /*inline-block permet de définir des dimensions tout en restant dans le flux du texte */
             background-color: #f5f5f5;
             color: #333333;
             padding: 4px 10px;
@@ -326,7 +324,7 @@
         .annonce-date {
             color: #666666;
             font-size: 0.85rem;
-            display: flex;
+            display: flex; 
             align-items: center;
             gap: 5px;
         }
@@ -383,9 +381,9 @@
             padding-top: 2rem;
             border-top: 1px solid #a8a29e;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /*space between the two paragraphs */
             align-items: center;
-            flex-wrap: wrap;
+            flex-wrap: wrap;/*allow items to wrap to the next line on smaller screens */
             gap: 1rem;
         }
 
@@ -423,7 +421,7 @@
         }
         
         /* Responsive */
-        @media (max-width: 992px) {
+        @media (max-width: 992px) { 
             .nav-menu {
                 gap: 15px;
                 font-size: 0.9rem;
@@ -705,35 +703,35 @@
             loadAnnonces();
             
             // Navigation principale
-            const currentPage = window.location.pathname.split('/').pop();
-            const navLinks = document.querySelectorAll('.nav-menu a');
+            const currentPage = window.location.pathname.split('/').pop(); // Récupère le nom du fichier actuel - le découpe par / et prend la dernière partie
+            const navLinks = document.querySelectorAll('.nav-menu a'); // Sélectionne tous les liens de navigation
             
-            navLinks.forEach(link => {
-                const linkPage = link.getAttribute('href');
-                if (currentPage === linkPage) {
-                    link.classList.add('active');
+            navLinks.forEach(link => { // Parcourt chaque lien
+                const linkPage = link.getAttribute('href'); // Récupère la valeur href du lien 
+                if (currentPage === linkPage) {// Compare avec la page actuelle
+                    link.classList.add('active');// Ajoute la classe active si c'est la page actuelle
                 } else {
-                    link.classList.remove('active');
+                    link.classList.remove('active');// Supprime la classe active sinon
                 }
             });
             
             // Gestion des filtres
-            const categoryFilter = document.getElementById('category-filter');
-            const domainFilter = document.getElementById('domain-filter');
-            const resetButton = document.getElementById('reset-filters');
+            const categoryFilter = document.getElementById('category-filter');// Sélectionne le filtre de catégorie
+            const domainFilter = document.getElementById('domain-filter');// Sélectionne le filtre de domaine
+            const resetButton = document.getElementById('reset-filters');// Sélectionne le bouton de réinitialisation
             
-            categoryFilter.addEventListener('change', filterAnnonces);
-            domainFilter.addEventListener('change', filterAnnonces);
+            categoryFilter.addEventListener('change', filterAnnonces);// Ajoute un écouteur d'événement pour le changement de catégorie
+            domainFilter.addEventListener('change', filterAnnonces);// Ajoute un écouteur d'événement pour le changement de domaine
             
-            resetButton.addEventListener('click', function() {
-                categoryFilter.value = 'all';
-                domainFilter.value = 'all';
-                filterAnnonces();
+            resetButton.addEventListener('click', function() { // Ajoute un écouteur d'événement pour le bouton de réinitialisation
+                categoryFilter.value = 'all'; // Réinitialise le filtre de catégorie
+                domainFilter.value = 'all'; // Réinitialise le filtre de domaine
+                filterAnnonces();// Recharge les annonces sans filtres
             });
             
             // Ajouter le style pour les icônes Font Awesome
-            const style = document.createElement('style');
-            style.textContent = `
+            const style = document.createElement('style'); //Crée dynamiquement un élément <style> pour injecter du CSS depuis JS.
+            style.textContent = ` 
                 .far, .fas {
                     font-family: 'Font Awesome 6 Free';
                 }
@@ -758,13 +756,13 @@
                     content: "\\f3c5";
                 }
             `;
-            document.head.appendChild(style);
+            document.head.appendChild(style); //Ajoute l'élément <style> au <head> du document pour appliquer les styles.
         });
 
-        function loadAnnonces(filteredData = annoncesData) {
-            const container = document.getElementById('annonces-container');
+        function loadAnnonces(filteredData = annoncesData) { // Charge les annonces, avec possibilité de données filtrées
+            const container = document.getElementById('annonces-container'); // Sélectionne le conteneur des annonces
             
-            if (filteredData.length === 0) {
+            if (filteredData.length === 0) { // Si aucune annonce ne correspond aux filtres
                 container.innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-search"></i>
@@ -775,18 +773,19 @@
                 `;
                 
                 // Re-attacher l'événement au bouton de réinitialisation
-                document.querySelector('#reset-all-filters').addEventListener('click', function() {
+                document.querySelector('#reset-all-filters').addEventListener('click', function() { // Ajoute un écouteur d'événement pour le bouton de réinitialisation
                     document.getElementById('category-filter').value = 'all';
                     document.getElementById('domain-filter').value = 'all';
-                    loadAnnonces(annoncesData);
+                    loadAnnonces(annoncesData);// Recharge toutes les annonces
                 });
                 
                 return;
             }
             
-            let annoncesHTML = '';
+            let annoncesHTML = '';// Initialisation de la variable pour stocker le HTML des annonces
             
-            filteredData.forEach(annonce => {
+            filteredData.forEach(annonce => {// Parcourt chaque annonce filtrée
+                //pour chaque annonce, on concatène un bloc HTML représentant l'annonce
                 annoncesHTML += `
                     <article class="annonce-card">
                         <div class="annonce-header">
@@ -821,29 +820,29 @@
                 `;
             });
             
-            container.innerHTML = annoncesHTML;
+            container.innerHTML = annoncesHTML; // Insère le HTML généré dans le conteneur des annonces
         }
 
         function filterAnnonces() {
-            const categoryValue = document.getElementById('category-filter').value;
+            const categoryValue = document.getElementById('category-filter').value;// Récupère la valeur du filtre de catégorie
             const domainValue = document.getElementById('domain-filter').value;
             
-            let filteredAnnonces = [...annoncesData];
+            let filteredAnnonces = [...annoncesData]; // Copie des données initiales
             
             // Filtrer par catégorie (propose/cherche)
-            if (categoryValue !== 'all') {
-                filteredAnnonces = filteredAnnonces.filter(annonce => annonce.type === categoryValue);
+            if (categoryValue !== 'all') { // Si une catégorie spécifique est sélectionnée
+                filteredAnnonces = filteredAnnonces.filter(annonce => annonce.type === categoryValue);// Filtre les annonces par type
             }
             
             // Filtrer par domaine
-            if (domainValue !== 'all') {
-                filteredAnnonces = filteredAnnonces.filter(annonce => {
+            if (domainValue !== 'all') { // Si un domaine spécifique est sélectionné
+                filteredAnnonces = filteredAnnonces.filter(annonce => { // Filtre les annonces par domaine
                     // Pour une correspondance plus intelligente
-                    const domaine = domainValue.toLowerCase();
-                    const categorie = annonce.category.toLowerCase();
+                    const domaine = domainValue.toLowerCase(); // Convertit le domaine sélectionné en minuscules pour comparaisons insensibles à la casse.
+                    const categorie = annonce.category.toLowerCase(); // Convertit la catégorie de l'annonce en minuscules
                     
                     // Correspondances directes
-                    if (domaine === 'informatique' && categorie.includes('informatique')) return true;
+                    if (domaine === 'informatique' && categorie.includes('informatique')) return true;  //includes: vérifie si une chaîne de caractères en contient une autre
                     if (domaine === 'musique' && categorie.includes('musique')) return true;
                     if (domaine === 'langues' && categorie.includes('langues')) return true;
                     if (domaine === 'art' && (categorie.includes('art') || categorie.includes('design'))) return true;
@@ -854,19 +853,19 @@
                     // Pour "autres", on inclut tout ce qui ne correspond pas aux autres catégories
                     if (domaine === 'autres') {
                         const autresDomaines = ['informatique', 'musique', 'langues', 'art', 'design', 'sport', 'cuisine', 'sciences', 'math'];
-                        return !autresDomaines.some(d => categorie.includes(d));
+                        return !autresDomaines.some(d => categorie.includes(d)); //some: teste si au moins un élément du tableau passe le test implémenté par la fonction fournie
                     }
                     
                     return false;
                 });
             }
             
-            loadAnnonces(filteredAnnonces);
+            loadAnnonces(filteredAnnonces); // Recharge les annonces avec les filtres appliqués
         }
 
         // Fonction pour formater la date
-        function formatDate(date) {
-            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        function formatDate(date) { // Prend une date au format jj/mm/aaaa
+            const options = { day: 'numeric', month: 'long', year: 'numeric' }; 
             return new Date(date).toLocaleDateString('fr-FR', options);
         }
     </script>

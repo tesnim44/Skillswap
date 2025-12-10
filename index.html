@@ -793,31 +793,31 @@
     </footer>
 
     <script>
-    function animateCounters() {
-        const counters = document.querySelectorAll('.counter');
+    function animateCounters() { // Animate counters when they come into view
+        const counters = document.querySelectorAll('.counter'); // Sélectionne tous les éléments avec la classe 'counter'
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const value = parseInt(entry.target.dataset.value);
+        const observer = new IntersectionObserver(entries => { // Crée un observateur d'intersection pour détecter quand les compteurs entrent dans la vue
+            entries.forEach(entry => { // Pour chaque entrée observée
+                if (entry.isIntersecting) {  // Si l'entrée est visible dans la vue
+                    const value = parseInt(entry.target.dataset.value); // Récupère la valeur cible à partir de l'attribut data-value
 
-                    anime({
-                        targets: entry.target,
-                        innerHTML: [0, value],
-                        duration: 2000,
-                        easing: 'easeOutExpo',
-                        round: 1
+                    anime({ // Anime le compteur de 0 à la valeur cible
+                        targets: entry.target, //sélectionne l'élément à animer
+                        innerHTML: [0, value], //anime le contenu HTML de 0 à la valeur cible
+                        duration: 2000, //durée de l'animation en millisecondes
+                        easing: 'easeOutExpo', //type
+                        round: 1 //arrondit les valeurs à l'entier le plus proche pendant l'animation
                     });
 
-                    observer.unobserve(entry.target);
+                    observer.unobserve(entry.target); // Arrête d'observer cet élément une fois l'animation terminée pour éviter de réanimer
                 }
             });
         });
 
-        counters.forEach(counter => observer.observe(counter));
+        counters.forEach(counter => observer.observe(counter)); // Observe chaque compteur pour déclencher l'animation lorsqu'il entre dans la vue
     }
 
-    document.addEventListener('DOMContentLoaded', animateCounters);
+    document.addEventListener('DOMContentLoaded', animateCounters); // appelle la fonction d'animation des compteurs une fois que le DOM est complètement chargé
     </script>
 </body>
 </html>
