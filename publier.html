@@ -681,9 +681,7 @@ input:focus, select:focus, textarea:focus {
             <!-- Étape 5 -->
             <div class="form-step" data-step="5">
                 <h2>Vérifiez votre annonce</h2>
-                <div class="preview" id="annonce-preview">
-                    <!-- Contenu généré par JS -->
-                </div>
+                <div class="preview" id="annonce-preview"></div>
                 <p class="step-description">
                     Votre annonce sera publiée et visible par tous les membres de la communauté SkillSwap.
                 </p>
@@ -741,15 +739,14 @@ input:focus, select:focus, textarea:focus {
         
         <div class="footer-bottom">
             <p class="footer-love">Made with <i class="fas fa-heart"></i> by students, for students</p>
-            <p class="footer-copyright">© 2024 SkillSwap. All rights reserved.</p>
+            <p class="footer-copyright">© 2025 SkillSwap. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Éléments DOM
-            const steps = document.querySelectorAll('.form-step');
-            const indicators = document.querySelectorAll('.step-indicator');
+            const steps = document.querySelectorAll('.form-step'); // Toutes les étapes
+            const indicators = document.querySelectorAll('.step-indicator'); // Indicateurs d'étape
             const nextBtn = document.querySelector('.btn-next');
             const prevBtn = document.querySelector('.btn-prev');
             const submitBtn = document.querySelector('.btn-submit');
@@ -758,81 +755,93 @@ input:focus, select:focus, textarea:focus {
             const preview = document.getElementById('annonce-preview');
             
             let currentStep = 0;
-            
-            // Gestion des catégories
+
             categoryCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    categoryCards.forEach(c => c.classList.remove('selected'));
+                card.addEventListener('click', () => { // Lorsqu'une carte est cliquée
+                    // Retire la classe 'selected' de toutes les cartes car une seule peut être sélectionnée
+                    categoryCards.forEach(c => c.classList.remove('selected')); //c référence à chaque carte
+                    // Ajoute 'selected' à la carte cliquée
                     card.classList.add('selected');
-                    document.getElementById('categorie-input').value = card.dataset.category;
+                    // Met à jour le champ caché avec la catégorie choisie car la valeur sera envoyée avec le formulaire 
+                    document.getElementById('categorie-input').value = card.dataset.category; 
                 });
             });
-            
-            // Navigation
-            nextBtn.addEventListener('click', nextStep);
+            nextBtn.addEventListener('click', nextStep); 
             prevBtn.addEventListener('click', prevStep);
             
+            // Fonction pour passer à l'étape suivante
             function nextStep() {
+                // Valide l'étape actuelle avant de continuer
                 if (validateStep(currentStep)) {
+                    // Vérifie qu'on n'est pas à la dernière étape
                     if (currentStep < steps.length - 1) {
+                        // Masque l'étape actuelle
                         steps[currentStep].classList.remove('active');
-                        indicators[currentStep].classList.remove('active');
-                        indicators[currentStep].classList.add('completed');
+                        indicators[currentStep].classList.remove('active'); //indicators refère aux cercles en haut
+                        indicators[currentStep].classList.add('completed'); // Marque comme terminée
                         
-                        currentStep++;
+                        currentStep++; // Incrémente l'étape
                         
+                        // Affiche la nouvelle étape
                         steps[currentStep].classList.add('active');
                         indicators[currentStep].classList.add('active');
                         
-                        updateUI();
+                        updateUI(); // Met à jour l'interface pour les boutons et la description
                         
+                        // Si on arrive à l'étape 5, met à jour l'aperçu
                         if (currentStep === 4) {
-                            updatePreview();
+                            updatePreview(); // Met à jour l'aperçu de l'annonce 
                         }
                     }
                 }
             }
             
+            // Fonction pour revenir à l'étape précédente
             function prevStep() {
+                // Vérifie qu'on n'est pas à la première étape
                 if (currentStep > 0) {
+                    // Masque l'étape actuelle
                     steps[currentStep].classList.remove('active');
                     indicators[currentStep].classList.remove('active');
                     
-                    currentStep--;
+                    currentStep--; // Décrémente l'étape
                     
+                    // Affiche la nouvelle étape
                     steps[currentStep].classList.add('active');
                     indicators[currentStep].classList.add('active');
-                    indicators[currentStep].classList.remove('completed');
+                    indicators[currentStep].classList.remove('completed'); // Retire "terminée"
                     
                     updateUI();
                 }
             }
-            
+        
             function validateStep(step) {
-                const currentStepEl = steps[step];
-                const inputs = currentStepEl.querySelectorAll('[required]');
-                let isValid = true;
+                const currentStepEl = steps[step]; // Élément de l'étape actuelle //steps référence à toutes les étapes
+                const inputs = currentStepEl.querySelectorAll('[required]'); // Champs requis de l'étape actuelle
+                let isValid = true; // Flag de validation
                 
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        input.style.borderColor = '#ef4444';
-                        isValid = false;
+                // Parcourt tous les champs requis
+                inputs.forEach(input => { //input référence à chaque champ 
+                    if (!input.value.trim()) { // Si champ vide //trim() enlève les espaces
+                        input.style.borderColor = '#ef4444'; // Bordure rouge
+                        isValid = false; // Invalide
                     } else {
                         input.style.borderColor = '#d1d5db';
                     }
                 });
                 
-                // Validation catégorie
+                // Validation spécifique pour l'étape 1 (catégorie)
                 if (step === 0 && !document.getElementById('categorie-input').value) {
                     alert('Veuillez sélectionner une catégorie');
                     isValid = false;
                 }
                 
-                return isValid;
+                return isValid; 
             }
             
+        
             function updateUI() {
-                // Mise à jour description
+                // Tableau des descriptions pour chaque étape
                 const descriptions = [
                     "Choisissez le type d'annonce",
                     "Sélectionnez votre domaine de compétence",
@@ -840,54 +849,58 @@ input:focus, select:focus, textarea:focus {
                     "Indiquez vos disponibilités",
                     "Vérifiez et publiez"
                 ];
+                // Met à jour la description de l'étape
                 document.getElementById('step-description').textContent = descriptions[currentStep];
                 
-                // Boutons
-                prevBtn.style.display = currentStep === 0 ? 'none' : 'block';
-                nextBtn.style.display = currentStep === 4 ? 'none' : 'block';
-                submitBtn.style.display = currentStep === 4 ? 'block' : 'none';
+                // Gestion de l'affichage des boutons
+                prevBtn.style.display = currentStep === 0 ? 'none' : 'block'; // Pas de "Précédent" sur la 1ère étape
+                nextBtn.style.display = currentStep === 4 ? 'none' : 'block'; // Pas de "Suivant" sur la dernière étape
+                submitBtn.style.display = currentStep === 4 ? 'block' : 'none'; // Affiche "Publier" seulement à la dernière étape
             }
-            
+        
             function updatePreview() {
-                const formData = new FormData(form);
-                const categorie = formData.get('categorie');
-                const domaine = formData.get('domaine');
-                const domaineEmoji = getDomaineEmoji(domaine);
+                // Récupère les données du formulaire
+                const formData = new FormData(form); //FormData permet de récupérer les données du formulaire facilement 
+                const categorie = formData.get('categorie'); // "propose" ou "cherche"
+                const domaine = formData.get('domaine'); // Domaine sélectionné
+                const domaineEmoji = getDomaineEmoji(domaine); // Emoji correspondant
                 
-               preview.innerHTML = ` 
-    <div class="preview-header">
-        <span class="preview-badge ${categorie === 'propose' ? 'badge-propose' : 'badge-cherche'}">
-            ${categorie === 'propose' ? 'Je propose' : 'Je cherche'}
-        </span>
-        <span style="color: #94d867; font-size: 0.875rem; font-weight: 500;">
-            <i class="fas fa-clock"></i> Maintenant
-        </span>
-    </div>
-    
-    <h3 style="margin-bottom: 1rem; color: #2c3e50; font-weight: 700;">
-        ${formData.get('titre') || 'Titre de l\'annonce'}
-    </h3>
-    
-    <p style="margin-bottom: 1rem; color: #666666; line-height: 1.6;">
-        ${formData.get('description') || 'Description...'}
-    </p>
-    
-    <div style="background: linear-gradient(90deg, #f0f8e8 0%, #f9fdf5 100%); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1rem; border-left: 4px solid #b0f582;">
-        <p style="color: #2c3e50; font-size: 0.95rem; font-weight: 600;">
-            <i class="fas fa-exchange-alt"></i> 
-            <strong style="color: #94d867;">Échange contre :</strong> 
-            ${formData.get('echange') || 'Compétence souhaitée...'}
-        </p>
-    </div>
-    
-    <span style="background: #ffffff; color: #2c3e50; padding: 0.5rem 1rem; border-radius: 1rem; font-size: 0.875rem; border: 1px solid #b0f582; display: inline-flex; align-items: center; gap: 0.5rem;">
-        <span style="color: #b0f582; font-size: 1.1rem;">${domaineEmoji}</span>
-        ${domaine || 'Domaine'}
-    </span>
-    
-`;
-}  
+                // Génère le HTML de prévisualisation
+                preview.innerHTML = ` 
+                    <div class="preview-header">
+                        <span class="preview-badge ${categorie === 'propose' ? 'badge-propose' : 'badge-cherche'}">
+                            ${categorie === 'propose' ? 'Je propose' : 'Je cherche'}
+                        </span>
+                        <span style="color: #94d867; font-size: 0.875rem; font-weight: 500;">
+                            <i class="fas fa-clock"></i> Maintenant
+                        </span>
+                    </div>
+                    
+                    <h3 style="margin-bottom: 1rem; color: #2c3e50; font-weight: 700;">
+                        ${formData.get('titre') || 'Titre de l\'annonce'}
+                    </h3>
+                    
+                    <p style="margin-bottom: 1rem; color: #666666; line-height: 1.6;">
+                        ${formData.get('description') || 'Description...'}
+                    </p>
+                    
+                    <div style="background: linear-gradient(90deg, #f0f8e8 0%, #f9fdf5 100%); padding: 1rem; border-radius: 0.75rem; margin-bottom: 1rem; border-left: 4px solid #b0f582;">
+                        <p style="color: #2c3e50; font-size: 0.95rem; font-weight: 600;">
+                            <i class="fas fa-exchange-alt"></i> 
+                            <strong style="color: #94d867;">Échange contre :</strong> 
+                            ${formData.get('echange') || 'Compétence souhaitée...'}
+                        </p>
+                    </div>
+                    
+                    <span style="background: #ffffff; color: #2c3e50; padding: 0.5rem 1rem; border-radius: 1rem; font-size: 0.875rem; border: 1px solid #b0f582; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: #b0f582; font-size: 1.1rem;">${domaineEmoji}</span>
+                        ${domaine || 'Domaine'}
+                    </span>
+                `;
+            }  
+            
             function getDomaineEmoji(domaine) {
+                // Mapping des domaines vers leurs emojis
                 const emojis = {
                     'musique': '🎵',
                     'informatique': '💻',
@@ -901,38 +914,20 @@ input:focus, select:focus, textarea:focus {
                 return emojis[domaine] || '📚';
             }
             
-            // Soumission
+
             form.addEventListener('submit', function(e) {
-                e.preventDefault();
+                e.preventDefault(); // Empêche le rechargement de la page
                 
-                const formData = new FormData(form);
-                const annonce = {
-                    id: Date.now(),
-                    titre: formData.get('titre'),
-                    description: formData.get('description'),
-                    categorie: formData.get('categorie'),
-                    domaine: formData.get('domaine'),
-                    competence: formData.get('competence'),
-                    niveau: formData.get('niveau'),
-                    echange: formData.get('echange'),
-                    disponibilites: formData.getAll('disponibilites'),
-                    horaires: formData.get('horaires'),
-                    mode: formData.get('mode'),
-                    date: new Date().toISOString()
-                };
-                
-                // Sauvegarde dans localStorage
-                let annonces = JSON.parse(localStorage.getItem('annonces') || '[]');
-                annonces.push(annonce);
-                localStorage.setItem('annonces', JSON.stringify(annonces));
-                
-                // Message de succès
-                showSuccessModal();
+                // Affiche le message succès
+                showSuccessModal(); //showSuccessModal référence à la fonction qui crée et affiche le modal de succès
             });
             
             function showSuccessModal() {
-                const modal = document.createElement('div');
-                modal.className = 'modal';
+                // Crée l'élément de success modal
+                const modal = document.createElement('div'); //div qui couvre tout l'écran
+                modal.className = 'modal';//classname permet d'ajouter une classe CSS à un élément
+                
+                // Contenu HTML du modal
                 modal.innerHTML = `
                     <div class="modal-content">
                         <div class="modal-emoji">🎉</div>
@@ -947,16 +942,17 @@ input:focus, select:focus, textarea:focus {
                     </div>
                 `;
                 
-                document.body.appendChild(modal);
+                // Ajoute le modal au body
+                document.body.appendChild(modal); 
                 
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        document.body.removeChild(modal);
+                // Permet de fermer le modal en cliquant à l'extérieur
+                modal.addEventListener('click', function(e) { //e référence à l'événement de clic
+                    if (e.target === modal) {  //target référence à l'élément cliqué
+                        document.body.removeChild(modal); 
                     }
                 });
             }
-            
-            // Initialisation
+
             updateUI();
         });
     </script>
